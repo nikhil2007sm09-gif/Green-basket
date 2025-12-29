@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | GreenBasket</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <style>
+.contact-hero {
+    padding: 100px 20px 60px;
+    text-align: center;
+    background: linear-gradient(to bottom, #f0fff4, #ffffff);
+}
+
+.contact-hero h1 { font-size: 3rem; margin-bottom: 15px; color: #1e293b; }
+.text-green { color: var(--primary); }
+
+.contact-wrapper { margin-top: -40px; }
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.info-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border-bottom: 4px solid transparent;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    border-bottom-color: var(--primary);
+}
+
+.info-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.contact-main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+
+.contact-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+input, textarea {
+    padding: 15px 20px;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary);
+    background: #f0fff4;
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-submit:hover {
+    background: #059669;
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+.map-container {
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+@media (max-width: 900px) {
+    .contact-main { grid-template-columns: 1fr; }
+    .input-group { grid-template-columns: 1fr; }
+}
+</style>
+
+    <header id="mainHeader">
+        <div class="nav container">
+            <div class="brand"><i class="fas fa-leaf"></i> GreenBasket</div>
+            <nav class="menu">
+                <a href="index.html">Home</a>
+                <a href="GroceryStore.html">Products</a>
+                <a href="Blog.html">Blog</a>
+                 <a href="about.html">About</a>
+                 <a href="login.html">Vendor Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Let's Start a <span class="text-green">Fresh</span> Conversation</h1>
+            <p>Sawaal ho ya sujhav, hum hamesha aapke liye hazir hain!</p>
+        </div>
+    </section>
+
+    <section class="contact-wrapper container">
+        <div class="contact-info-grid">
+            <div class="info-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Call Us</h3>
+                <p>+91 7988454150</p>
+                <span>Mon - Sat, 9am - 9pm</span>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>nikhilsm09@gmail.com</p>
+                <span>24/7 Support</span>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Visit Us</h3>
+                <p>India/Haryana/Rohtak/</p>
+                <span>Address: 252 Prem Plaza Subhash Nagar
+Rohtak, Haryana 124001</span>
+            </div>
+        </div>
+
+        <div class="contact-main">
+            <div class="contact-form-container">
+                <form id="contactForm">
+                    <div class="input-group">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <input type="text" placeholder="Subject">
+                    <textarea rows="5" placeholder="How can we help you?"></textarea>
+                    <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14024.123456789!2d77.0266!3d28.4595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19d582e38859%3A0x2cf5e8b4e7240c!2sGurugram%2C%20Haryana!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer style="margin-top: 100px;">
+        </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Dhanyawad! Hum aapse jaldi sampark karenge.');
+        });
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+
+    const btn = this.querySelector('.btn-submit');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Sending... <i class="fas fa-circle-notch fa-spin"></i>';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    const name = this.querySelectorAll('input')[0].value;
+    const email = this.querySelectorAll('input')[1].value;
+    const subject = this.querySelectorAll('input')[2].value;
+    const message = this.querySelector('textarea').value;
+
+    try {
+        const response = await fetch('https://formspree.io/f/YOUR_ID_HERE', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                subject: subject,
+                message: message
+            })
+        });
+
+        if (response.ok) {
+     
+            btn.innerHTML = 'Sent Successfully! <i class="fas fa-check"></i>';
+            btn.style.background = '#059669';
+            this.reset(); 
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = 'var(--primary)';
+                btn.style.opacity = '1';
+                btn.disabled = false;
+            }, 5000);
+
+        } else {
+            throw new Error('Failed to send');
+        }
+    } catch (error) {
+       
+        btn.innerHTML = 'Error! Try Again <i class="fas fa-exclamation-triangle"></i>';
+        btn.style.background = '#dc2626';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }, 3000);
+    }
+});
+
+ 
+
+
+
+    </script>
+</body>
+</html>

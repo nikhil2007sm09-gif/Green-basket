@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Create Account</title></head>
+<body>
+<h2>Create Account</h2>
+<input id="name" placeholder="Name"><br><br>
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+<button onclick="signup()">Signup</button>
+<p id="msg"></p>
+
+
+<script>
+function signup(){
+fetch('http://localhost:3000/signup',{
+method:'POST',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+name:name.value,email:email.value,password:password.value
+})})
+.then(r=>r.json())
+.then(d=>{msg.innerText=d.message; if(!d.message.includes('exists')) location.href='login.html'})
+}
+
+</script>
+</body>
+</html>

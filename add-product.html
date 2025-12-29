@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh
+        }
+
+        .form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15)
+        }
+
+        .form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0f766e
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc
+        }
+
+        button {
+            background: #0f766e;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            cursor: pointer
+        }
+
+        button:hover {
+            background: #115e59
+        }
+
+        #msg {
+            text-align: center;
+            font-weight: 600
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="form">
+        <h2>Add New Product</h2>
+        <input id="name" placeholder="Product Name">
+        <input id="price" type="number" placeholder="Price">
+        <select id="category">
+            <option>Vegetables</option>
+            <option>Fruits</option>
+            <option>Grocery</option>
+        </select>
+        <input id="image" placeholder="Image URL">
+        <textarea id="desc" placeholder="Description"></textarea>
+        <button onclick="addProduct()">Add Product</button>
+        <div id="msg"></div>
+    </div>
+
+
+    <script>
+        async function addProduct() {
+            const product = {
+                name: name.value,
+                price: price.value,
+                category: category.value,
+                image: image.value,
+                description: desc.value
+            };
+
+
+            const res = await fetch('http://localhost:3000/api/products', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            });
+
+
+
+            const data = await res.json();
+            msg.innerHTML = '✅ Product Added Successfully';
+        }
+        console.log("Add Product Page Loaded");
+  
+
+        const grid = document.getElementById("productsGrid");
+        function showProduct(product){
+            grid.innerHTML +=addProduct(`
+            <div class="product-card">
+                <img src = "${product.image}">
+                <h3>${product.name}</h3>)
+                <p>${product.price}</p>
+                <button>Add to cart<button>
+                    </div>
+                    `);
+        }
+        const products = fetch("http://localhost:3000/api/products");
+        products.then(res => res.json())
+        .then(data => {
+            data.forEach(showProduct);
+            data.forEach(product => console.log(product));
+        })
+      
+    </script>
+</body>
+
+</html>

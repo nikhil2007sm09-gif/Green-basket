@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Panel - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard_styles.css">
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Panel - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard_styles.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+   <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">Vendor Panel</div>
+            <nav>
+                <ul>
+                     <li class="active"><a href="vendor_dashboard.html">Dashboard</a></li>
+                    <li><a href="Product.uploding.html">Add Product</a></li>
+                    <li><a href="inventory_management.html">Manage Inventory</a></li>
+                    <li><a href="orders_management.html">Orders</a></li>
+                    <li><a href="#">Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="header">
+            <h1>Add / Edit Product</h1>
+            <div class="user-info">
+                Welcome, <strong>Nikhil</strong>
+                <span class="profile-icon">VN</span>
+            </div>
+        </header>
+
+        <!-- Add Product Form -->
+        <section class="product-form-box">
+            <h2>Product Details</h2>
+            <form id="productForm" onsubmit="saveProduct(event)">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="product_name" placeholder="Product Name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label>SKU</label>
+                        <input type="text" id="sku" placeholder="SKU">
+                    </div>
+                    <div class="form-group half-width">
+                        <label>Category</label>
+                        <select id="category" onchange="updateSubCategory()" required>
+                            <option value="">Select Category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Home">Home</option>
+                            <option value="Books">Books</option>
+                            <option value="Beauty">Beauty</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Sub-category</label>
+                    <select id="sub_category" required>
+                        <option value="">Select Sub-category</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label>Price</label>
+                        <input type="number" id="price" placeholder="Price" step="0.01" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label>MRP</label>
+                        <input type="number" id="mrp" placeholder="MRP" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label>Quantity</label>
+                        <input type="number" id="quantity" placeholder="Quantity" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label>Rating</label>
+                        <select id="rating" required>
+                            <option value="">Select Rating</option>
+                            <option value="1">1 ⭐</option>
+                            <option value="2">2 ⭐</option>
+                            <option value="3">3 ⭐</option>
+                            <option value="4">4 ⭐</option>
+                            <option value="5">5 ⭐</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Color</label>
+                    <input type="text" id="color" placeholder="Color">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="description" placeholder="Product Description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Product Image</label>
+                    <input type="file" id="productImages" accept="image/*">
+                    <input type="file" id="productImages" accept="image/*">
+                    <input type="file" id="productImages" accept="image/*">
+                    <input type="file" id="productImages" accept="image/*">
+                    <input type="file" id="productImages" accept="image/*">
+                </div>
+
+                <button type="submit" class="submit-product-btn">Save / Publish</button>
+            </form>
+            <p class="backend-note" id="formMessage"></p>
+        </section>
+
+        <!-- Inventory -->
+        <section class="inventory">
+            <h2>Inventory</h2>
+            <div id="inventoryContainer" class="inventory-grid"></div>
+        </section>
+    
+    
+    </main>
+</div>
+<div class="form-group">
+    <label>Product Images (Max 5)</label>
+    <div class="upload-container" id="dropZone">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Drag & Drop or Click to Upload</p>
+        <input type="file" id="productImages" accept="image/*" multiple hidden>
+    </div>
+    <div id="imagePreviewContainer" class="preview-grid"></div>
+</div>
+
+<div class="discount-badge" id="discountInfo">Discount: 0%</div>
+<script> 
+    function saveProduct(event){
+        event.preventDefault();
+        const product = {
+            name: document.getElementById('product_name').value,
+            sku: docment.getElementById('sku').value,
+            category : document.getElementById('category').value,
+            sub_category: document.getElementById('sub_category').value,
+            price: document.getElementById('price').value,
+            mrp : document.getElementById('mrp').value,
+            quantity:document.getElementById('quantity').value,
+            rating: document.getElementById('rating').value,
+            colour: document.getElementById('colour').value,
+            descripation: document.getElementById('descripation').value,
+
+        }
+    }
+    const formMessage = document.getElementById('formMessage');
+    fetch('http://localhost:3000/api/products',{
+        method: 'POST',
+        headers: {'Content-type': 'appliction/json'},
+        body: JSON.stringify(product)
+    });
+    
+</script>
+
+<script src="vendor_panel.js"></script>
+</body>
+</html>
+
+
+    

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenBasket | Access Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #16a34a; --dark: #1e293b; --bg: #f0f4f8; --danger: #ef4444; }
+        * { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin: 0; padding: 0; transition: 0.3s ease-in-out; }
+        
+        body { 
+            background: linear-gradient(135deg, #dcfce7 0%, #f0f4f8 100%);
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+        }
+
+        .auth-card {
+            background: white; width: 400px; padding: 40px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center;
+        }
+
+        .logo { color: var(--primary); font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+        h2 { color: var(--dark); margin-bottom: 25px; font-size: 1.2rem; }
+
+        .input-group { position: relative; margin-bottom: 15px; }
+        .input-group i { position: absolute; left: 15px; top: 15px; color: #94a3b8; }
+        input { 
+            width: 100%; padding: 14px 14px 14px 45px; border-radius: 12px;
+            border: 2px solid #e2e8f0; outline: none;
+        }
+        input:focus { border-color: var(--primary); background: #f0fdf4; }
+
+        .btn { 
+            width: 100%; padding: 14px; border: none; border-radius: 12px; 
+            font-weight: 700; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(22, 163, 74, 0.3); }
+
+        .google-btn { background: white; border: 2px solid #e2e8f0; color: var(--dark); margin-top: 15px; }
+        .google-btn img { width: 20px; }
+
+        .phone-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        .country-code { width: 80px; background: #f8fafc; text-align: center; padding-left: 0 !important; }
+
+        .otp-inputs { display: flex; gap: 10px; justify-content: center; margin: 20px 0; }
+        .otp-box { width: 50px; height: 50px; text-align: center; padding: 0; font-size: 1.5rem; font-weight: bold; border-radius: 10px; border: 2px solid #e2e8f0; }
+
+        .divider { margin: 20px 0; display: flex; align-items: center; color: #94a3b8; font-size: 0.8rem; }
+        .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin: 0 10px; }
+
+        .toggle-text { margin-top: 20px; font-size: 0.85rem; color: #64748b; }
+        .toggle-text span { color: var(--primary); cursor: pointer; font-weight: 700; }
+        
+        #signup-form, #reset-form, #otp-form, #phone-login-form { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <div class="logo"><i class="fas fa-leaf"></i> GreenBasket</div>
+        
+        <div id="login-form">
+            <h2>Welcome Back!</h2>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="login-email" placeholder="Email Address">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-pass" placeholder="Password">
+            </div>
+            <button class="btn btn-primary" onclick="handleLogin()">Login </button>
+            
+            <div class="divider">OR CONTINUE WITH</div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="btn google-btn" style="margin-top:0;" onclick="handleGoogleLogin()">
+                    <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"> Google
+                </button>
+                <button class="btn" style="background: #f1f5f9; color: var(--dark);" onclick="showForm('phone-login')">
+                    <i class="fas fa-mobile-alt"></i> Phone
+                </button>
+            </div>
+            
+            <p class="toggle-text">Don't have an account? <span onclick="showForm('signup')">Create Account</span></p>
+        </div>
+
+        <div id="phone-login-form">
+            <h2>Phone Login</h2>
+            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 20px;">Enter your mobile number for OTP.</p>
+            <div class="phone-group">
+                <input type="text" value="+91" class="country-code" readonly>
+                <div class="input-group" style="flex: 1; margin-bottom: 0;">
+                    <i class="fas fa-phone"></i>
+                    <input type="number" id="login-phone" placeholder="10-digit number">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="sendOTP('phone')">Send OTP</button>
+            <p class="toggle-text"><span onclick="showForm('login')">Back to Login</span></p>
+        </div>
+
+        <div id="otp-form">
+            <h2>Verify Identity</h2>
+            <p id="otp-message" style="font-size: 0.8rem; color: #64748b;"></p>
+            <div class="otp-inputs">
+                <input type="text" class="otp-box" maxlength="1" onkeyup="moveFocus(this, 'n1')" id="o1">
+                <input type="text" class="otp-box" maxlength="1" onkeyup="moveFocus(this, 'n2')" id="n1">
+                <input type="text" class="otp-box" maxlength="1" onkeyup="moveFocus(this, 'n3')" id="n2">
+                <input type="text" class="otp-box" maxlength="1" id="n3">
+            </div>
+            <button class="btn btn-primary" onclick="verifyOTP()">Verify & Access</button>
+            <p class="toggle-text">Didn't get code? <span onclick="alert('OTP Resent!')">Resend</span></p>
+        </div>
+
+        <div id="signup-form">
+            <h2>Create Account</h2>
+            <div class="input-group"><i class="fas fa-user"></i><input type="text" id="reg-name" placeholder="Full Name"></div>
+            <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="reg-email" placeholder="Email"></div>
+            <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="reg-pass" placeholder="Password"></div>
+            <button class="btn btn-primary" onclick="handleSignup()">Register Now</button>
+            <p class="toggle-text">Already a member? <span onclick="showForm('login')">Login Here</span></p>
+        </div>
+    </div>
+    
+
+    <script>
+        let generatedOTP = "";
+
+        function showForm(type) {
+            const forms = ['login-form', 'signup-form', 'otp-form', 'phone-login-form'];
+            forms.forEach(f => document.getElementById(f).style.display = "none");
+            document.getElementById(type + '-form').style.display = "block";
+        }
+
+        function moveFocus(current, nextId) {
+            if (current.value.length >= 1) document.getElementById(nextId).focus();
+        }
+
+        // --- GOOGLE LOGIN ---
+        function handleGoogleLogin() {
+            const email = prompt("Enter your Google Email:");
+            if (email && email.includes("@")) {
+                alert("Verified by Google! Welcome " + email.split('@')[0]);
+                window.location.href = "vendor.html";
+            }
+        }
+
+        // --- PHONE & OTP ---
+        function sendOTP(method) {
+            const phone = document.getElementById('login-phone').value;
+            if(phone.length < 10) return alert("Enter valid phone!");
+            
+            generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+            alert("GreenBasket Security Code: " + generatedOTP);
+            document.getElementById('otp-message').innerText = "Enter code sent to +91 " + phone;
+            showForm('otp');
+        }
+
+        function verifyOTP() {
+            const entered = document.getElementById('o1').value + document.getElementById('n1').value + 
+                            document.getElementById('n2').value + document.getElementById('n3').value;
+            if(entered === generatedOTP) {
+                alert("Login Successful!");
+                window.location.href = "vendor.html";
+            } else {
+                alert("Wrong OTP!");
+            }
+        }
+
+        // --- EMAIL LOGIN ---
+        function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            const savedUser = JSON.parse(localStorage.getItem('adminUser'));
+
+            if(savedUser && email === savedUser.email && pass === savedUser.pass) {
+                window.location.href = "vendor.html";
+            } else {
+                alert("Invalid Credentials! Or please Sign Up first.");
+            }
+        }
+
+        function handleSignup() {
+            const user = {
+                name: document.getElementById('reg-name').value,
+                email: document.getElementById('reg-email').value,
+                pass: document.getElementById('reg-pass').value
+            };
+            localStorage.setItem('adminUser', JSON.stringify(user));
+            alert("Account Registered!");
+            showForm('login');
+        }
+    </script>
+</body>
+</html>

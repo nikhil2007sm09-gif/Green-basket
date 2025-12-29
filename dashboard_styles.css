@@ -1,0 +1,608 @@
+/* --- dashboard_styles.css --- */
+
+:root {
+    --amazon-blue: #131921;
+    --amazon-orange: #ff9900;
+    --amazon-light-blue: #232f3e;
+    --amazon-green: #007600;
+    --body-bg: #eaeded;
+    --sidebar-bg: #232f3e;
+    --active-link-bg: #ff9900;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Amazon Ember', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--body-bg);
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: #fff;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-header {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--amazon-orange);
+    padding: 0 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav li a {
+    display: block;
+    padding: 15px 20px;
+    color: #ccc;
+    text-decoration: none;
+    transition: background-color 0.1s, color 0.1s;
+}
+
+.sidebar nav li a:hover {
+    background-color: var(--amazon-blue);
+    color: #fff;
+}
+
+.sidebar nav li.active {
+    background-color: var(--amazon-orange); /* Highlight active link */
+}
+
+.sidebar nav li.active a {
+    color: var(--amazon-blue);
+    font-weight: 700;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+}
+
+.header {
+    background-color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--amazon-blue);
+}
+
+.user-info {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--amazon-orange);
+    color: var(--amazon-blue);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+/* Form Box Styling */
+.product-form-box {
+    background-color: #fff;
+    margin: 50px;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+
+.product-form-box h2 {
+    color: var(--amazon-blue);
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Form Groups and Inputs */
+.form-group {
+    margin-bottom: 40px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--amazon-orange);
+    box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.3);
+    outline: none;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group.half-width {
+    flex: 1;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* Submit Button */
+.submit-product-btn {
+    background-color: var(--amazon-orange);
+    color: var(--amazon-blue);
+    padding: 12px 25px;
+    border: 1px solid #c45500;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-product-btn:hover {
+    background-color: #e47911;
+}
+
+/* Message and Link */
+.backend-note {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    /* This will be updated by JS for success/error */
+}
+
+.view-products-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+}
+
+.action-link {
+    color: var(--amazon-blue);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.1s;
+}
+
+.action-link:hover {
+    color: var(--amazon-orange);
+}
+
+
+
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+    gap: 20px;
+    padding: 30px;
+}
+
+.widget {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    transition: transform 0.2s;
+}
+
+.widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.widget h3 {
+    font-size: 18px;
+    color: var(--amazon-blue);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.data-point {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.highlight-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--amazon-blue);
+}
+
+.low-stock .highlight-number {
+    color: #cc0000; /* Red for low stock warning */
+}
+
+.processing-order .highlight-number {
+    color: var(--amazon-orange); /* Orange for active orders */
+}
+
+.delivered-order .highlight-number,
+.sales-metrics .highlight-number {
+    color: var(--amazon-green); /* Green for positive/completed actions */
+}
+
+.small-text {
+    font-size: 16px;
+    color: #000;
+}
+
+.widget-link {
+    display: block;
+    text-align: right;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dotted #ddd;
+    color: var(--amazon-blue);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    transition: color 0.1s;
+}
+
+.widget-link:hover {
+    color: var(--amazon-orange);
+}
+
+
+/* --- dashboard_styles.css में जोड़ें --- */
+/* --- Logout Button --- */
+#logoutButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #f87171; /* Red */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin: 10px;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  color: #333;
+  padding: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eb0f0f;
+  text-shadow:rgb(244, 169, 7);
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+header button {
+  background: #ed0909;
+  color: #e913139c;
+  border: none;
+  padding:2PX 4px;
+  border-radius: 10;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+header button:hover {
+  background: #f0f0f0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.add-product, .inventory {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.add-product h2, .inventory h2 {
+  margin-bottom: 15px;
+  color: #761c00;
+}
+
+form input, form textarea, form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+form button {
+  background: #04385d;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background: #005900;
+}
+
+#formMessage {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.inventory-card {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.inventory-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.inventory-card h4 {
+  margin-bottom: 5px;
+  color: #0534dd;
+}
+
+.inventory-card p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.inventory-card button {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.inventory-card button:hover {
+  background: #cc3a00;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  form input, form textarea, form button {
+    font-size: 0.9rem;
+  }
+}
+/* Large Image Overlay */
+.image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden; /* Prevent scroll behind */
+}
+
+.image-overlay .large-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    touch-action: none; /* Needed for mobile drag */
+}
+
+.image-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1010;
+}
+/* Lightbox overlay */
+.gallery-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gallery-overlay .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.gallery-overlay .gallery-image {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
+
+.gallery-overlay .thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gallery-overlay .thumbs img {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.gallery-overlay .thumbs img:hover {
+  transform: scale(1.1);
+  border-color: #04385d;
+}
+
+
+.edit-btn {
+    background-color: #1e90ff; /* Amazon-style blue */
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background-color: #0b65c2;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #cc3a00;
+}
+
+/* ----------- Logout Button ----------- */
+#logoutButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-light);
+    background-color: #f87171; /* Amazon-style red */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin: 10px 0;
+}
+
+#logoutButton:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}

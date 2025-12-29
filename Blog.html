@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenBasket | Premium Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #059669;
+      --secondary: #10b981;
+      --dark: #064e3b;
+      --bg-light: #f8fafc;
+      --transition: all 0.3s ease;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+
+    /* --- Responsive Navbar --- */
+    .navbar {
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Desktop Menu */
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 600;
+      font-size: 15px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-actions { display: flex; align-items: center; gap: 20px; }
+    .nav-icons { display: flex; gap: 15px; font-size: 18px; color: #64748b; }
+
+    /* Mobile Menu Icon */
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    /* --- Mobile Responsive Navigation Logic --- */
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        height: calc(100vh - 70px);
+        text-align: center;
+        padding: 40px 0;
+        transition: 0.4s ease;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+      }
+
+      .nav-links.active { left: 0; }
+      .nav-icons { display: none; } /* Mobile par icons hide kar diye space ke liye */
+    }
+
+    /* --- Header & Search --- */
+    header {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 60px 20px 100px;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    }
+
+    header h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; margin: 0; }
+    
+    .search-container {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      padding: 0 10px;
+    }
+
+    .search-container input {
+      padding: 12px 20px;
+      width: 100%;
+      max-width: 350px;
+      border-radius: 50px 0 0 50px;
+      border: none;
+      outline: none;
+    }
+
+    .search-container button {
+      padding: 12px 20px;
+      border-radius: 0 50px 50px 0;
+      border: none;
+      background: var(--dark);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* --- Blog Grid Responsive --- */
+    .container {
+      max-width: 1200px;
+      margin: -50px auto 60px;
+      padding: 0 20px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .blog-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+
+    .blog-card:hover { transform: translateY(-8px); }
+    .image-box { height: 200px; }
+    .image-box img { width: 100%; height: 100%; object-fit: cover; }
+    .blog-content { padding: 20px; }
+    .tag { background: #d1fae5; color: #047857; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+    .read-more { text-decoration: none; color: var(--primary); font-weight: 700; margin-top: 15px; display: block; }
+
+    /* --- Newsletter Responsive --- */
+    .newsletter-section {
+      background: #f1f5f9;
+      padding: 60px 20px;
+      text-align: center;
+      margin: 40px 20px;
+      border-radius: 25px;
+    }
+
+    .newsletter-card { max-width: 500px; margin: auto; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    
+    @media (min-width: 600px) {
+      .newsletter-form { flex-direction: row; }
+    }
+
+    .newsletter-form input { padding: 12px; border-radius: 10px; border: 1px solid #ddd; flex: 1; outline: none; }
+    .newsletter-form button { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px; }
+
+    /* Animation */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo"><i class="fa-solid fa-leaf"></i> GreenBasket</a>
+  
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="GroceryStore.html">Shop</a>
+    <a href="Blog.html" style="color: var(--primary);">Blog</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Vendor Login</a>
+  </div>
+
+  <div class="nav-actions">
+    <div class="nav-icons">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <h1>GreenBasket Blog</h1>
+  <p>Fresh ideas • Healthy living</p>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search articles...">
+    <button onclick="filterBlogs()">Search</button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="blog-grid" id="blogGrid">
+    <div class="blog-card">
+      <div class="image-box"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600" /></div>
+      <div class="blog-content">
+        <span class="tag">Healthy</span>
+        <h3>Why Fresh Vegetables Matter</h3>
+        <p>Learn why daily fresh intake is important for your immunity.</p>
+        <a href="healthy.html" class="read-more">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="image-box"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600" /></div>
+      <div class="blog-content">
+        <span class="tag">Money</span>
+        <h3>How to Save on Groceries</h3>
+        <p>Smart shopping tips to reduce your monthly grocery bill.</p>
+        <a href="Lifestyle.html" class="read-more">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="image-box"><img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=600" /></div>
+      <div class="blog-content">
+        <span class="tag">Organic</span>
+        <h3>Organic vs Non‑Organic</h3>
+        <p>Understand the difference between organic and non-organic foods.</p>
+        <a href="Organic.html" class="read-more">Read More →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="newsletter-section">
+  <div class="newsletter-card">
+    <h2>Weekly Fresh Tips</h2>
+    <p>Join our community for organic updates.</p>
+    <form class="newsletter-form" id="newsForm">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+
+<footer>
+  <p>© 2025 GreenBasket • All rights reserved</p>
+</footer>
+
+<script>
+  // 1. Mobile Menu Toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    // Hamburger icon change to X
+    const icon = hamburger.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-xmark');
+  });
+
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.style.padding = "10px 5%";
+      navbar.style.background = "rgba(255, 255, 255, 0.95)";
+    } else {
+      navbar.style.padding = "15px 5%";
+      navbar.style.background = "white";
+    }
+  });
+
+  
+  function filterBlogs() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.blog-card');
+    
+    cards.forEach(card => {
+      const title = card.querySelector('h3').innerText.toLowerCase();
+      if (title.includes(query)) {
+        card.style.display = "block";
+        card.style.animation = "fadeIn 0.4s ease forwards";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  
+  document.getElementById('searchInput').addEventListener('keyup', filterBlogs);
+
+
+  document.getElementById('newsForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("Shukriya! Aapne subscribe kar liya hai. 🌿");
+    e.target.reset();
+  });
+ 
+ function fadeIn() {
+    const cards = document.querySelectorAll('.blog-card');
+    cards.forEach(card => {
+      card.style.animation = "fadeIn 0.4s ease forwards";
+    });
+  }
+</script>
+  
+</body>
+</html>
